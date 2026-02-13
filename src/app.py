@@ -1,14 +1,20 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+import joblib
+
+
+@st.cache_resource 
+def load_models():
+    #pipeline = joblib.load('svd_pipeline.joblib')
+    # sim_matrix = joblib.load('cosine_sim_lsa.joblib')
+    # means = joblib.load('joke_means.joblib')
+    # return pipeline, sim_matrix, means
+    pass
 
 @st.cache_data 
 def load_data():
-    # Тук зареди твоите обработени файлове
-    jokes_df = pd.read_csv('../Data/processed_jokes.csv') 
-    # Зареждаме и предварително сметнатата LSA матрица (или я смятаме тук)
-    # lsa_matrix = np.load('lsa_matrix.npy') 
+    jokes_df = pd.read_csv('../Data/processed_jokes.csv')  
     return jokes_df
 
 def get_next_best_joke(jokes_df):

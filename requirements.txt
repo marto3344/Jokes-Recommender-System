@@ -18,3 +18,4 @@ nltk
 gensim
 spacy
 streamlit
+joblib
