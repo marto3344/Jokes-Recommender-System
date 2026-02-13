@@ -87,7 +87,7 @@ def main():
 
     st.markdown("---")
     st.subheader(f"Joke #{current_id}")
-    st.info(joke_text.replace("<br>", "\n"))
+    st.info(joke_text)
 
     rating = st.select_slider(
         "Your Rating:",
@@ -110,6 +110,14 @@ def main():
                 st.session_state.current_joke_id = get_next_best_joke(jokes_df, pipeline)
                 
         st.rerun()
+
+    st.markdown("---")
+    st.subheader("You may also like")
+    similar_jokes = get_recommendations(current_id, jokes_df, sim_matrix, top_n=3)
+    if similar_jokes is not None and not similar_jokes.empty:
+        for idx, row in similar_jokes.iterrows():
+            st.info(row['Text'])
+            st.markdown("")
 
 if __name__ == '__main__':
     main()
